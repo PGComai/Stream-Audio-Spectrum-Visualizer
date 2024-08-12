@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://8k0qf7iwkib3"]
+
+[sub_resource type="Curve" id="Curve_nxthc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502439, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xpq0k"]
+curve = SubResource("Curve_nxthc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iix6r"]
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 0.01, 0.1)
+gravity = Vector3(0, -16, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_xpq0k")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.26
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7toff"]
+shading_mode = 0
+use_point_size = true
+point_size = 4.0
+
+[sub_resource type="PointMesh" id="PointMesh_11mja"]
+material = SubResource("StandardMaterial3D_7toff")
+
+[node name="SpectrumBar" type="GPUParticles3D"]
+amount = 32
+fixed_fps = 60
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_iix6r")
+draw_pass_1 = SubResource("PointMesh_11mja")

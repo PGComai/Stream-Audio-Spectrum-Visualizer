@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://clbmyppuvc0fb"]
+
+[ext_resource type="Script" path="res://scripts/audio_capture_test.gd" id="1_6w4of"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0boga"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fowlv"]
+sky_material = SubResource("ProceduralSkyMaterial_0boga")
+
+[sub_resource type="Environment" id="Environment_2f4aj"]
+sky = SubResource("Sky_fowlv")
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_nreqi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1clfp"]
+shading_mode = 0
+point_size = 4.8
+
+[node name="AudioCaptureTest" type="Node3D"]
+script = ExtResource("1_6w4of")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2f4aj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_nreqi")
+autoplay = true
+bus = &"Record"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48558, 9)
+projection = 1
+size = 3.41
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1clfp")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(6, 1, 2)
